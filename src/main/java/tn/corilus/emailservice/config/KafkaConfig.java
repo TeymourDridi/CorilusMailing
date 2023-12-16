@@ -63,9 +63,8 @@ public class KafkaConfig {
         configProps.put("security.protocol", "SASL_SSL");
         configProps.put("sasl.mechanism", "PLAIN");
         configProps.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"" + apiKey + "\" password=\"" + apiSecret + "\";");
-        //configProps.put(JsonDeserializer.TRUSTED_PACKAGES, TRUSTED_PACKAGES);
-        return new DefaultKafkaConsumerFactory<>(configProps, new StringDeserializer(),
-                deserializer);
+
+        return new DefaultKafkaConsumerFactory<>(configProps, new StringDeserializer(), deserializer);
     }
 
     @Bean
@@ -74,4 +73,5 @@ public class KafkaConfig {
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
+
 }

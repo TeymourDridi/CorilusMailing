@@ -8,11 +8,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmailDetails {
+
     private String recipient;
+
     private String msgBody;
+
     private String subject;
+
     private String attachment;
+
     private String userName;
+
     private String name;
+
     private String lastName;
+
 }

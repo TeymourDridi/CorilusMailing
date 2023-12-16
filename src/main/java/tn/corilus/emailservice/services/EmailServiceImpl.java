@@ -21,18 +21,13 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public String sendSimpleMail(EmailDetails details)
     {
-
         try {
-            // Create a MimeMessage
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
-            // Use MimeMessageHelper to enable HTML content
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, StandardCharsets.UTF_8.name());
 
-            // Setting up necessary details
             helper.setFrom(sender);
             helper.setTo(details.getRecipient());
-            //helper.setText(details.getMsgBody());
             helper.setSubject(details.getSubject());
             String situation =details.getSubject().contains("Approuvé") ? "Félicitations ! Votre compte a été approuvé.":details.getSubject().contains("Débloqué") ? "Félicitations ! Votre compte a été débloqué." : "Désolé ! Votre compte a été bloqué.";
             helper.setText( "<!DOCTYPE html>\n" +
@@ -71,10 +66,7 @@ public class EmailServiceImpl implements EmailService {
             javaMailSender.send(mimeMessage);
             logger.info("Mail Sent Successfully");
             return "Mail Sent Successfully...";
-        }
-
-        // Catch block to handle the exceptions
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.severe(e.getMessage());
             return "Error while Sending Mail";
         }

@@ -15,16 +15,12 @@ import tn.corilus.emailservice.services.EmailService;
 public class EmailController {
     private final EmailService emailService;
 
-    // Sending a simple Email
     @KafkaListener(topics = "email-topic", groupId = "email-consumer-group")
     public ResponseEntity<String>
-    sendMail(@RequestBody EmailDetails details)
-    {
-        String status
-                = emailService.sendSimpleMail(details);
+    sendMail(@RequestBody EmailDetails details) {
+        String status = emailService.sendSimpleMail(details);
 
         return ResponseEntity.ok().body(status);
     }
-
 
 }
